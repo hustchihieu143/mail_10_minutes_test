@@ -4,7 +4,7 @@ sys.path.insert(0,'/home/chihieu/project_web/test_poetry/config')
 from db import meta
 from sqlalchemy.sql.sqltypes import Integer, String, DateTime
 
-emailData = Table('emailData', meta,
+email_data = Table('emailData', meta,
             Column('id', Integer, primary_key=True),
             Column('receiver_id', Integer, nullable=False), 
             Column('sender', String, nullable=False),

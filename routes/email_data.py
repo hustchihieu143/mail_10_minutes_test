@@ -3,19 +3,19 @@ import sys
 sys.path.insert(0,'/home/chihieu/project_web/test_poetry/config')
 sys.path.insert(1,'/home/chihieu/project_web/test_poetry/models')
 from db import conn
-from index import emailData
+from index import email_data
 
-emailDataRouter = APIRouter()
+email_data_router = APIRouter()
 
 #test
-@emailDataRouter.get("/get_data")
+@email_data_router.get("/get_data")
 async def read_data():
-  return conn.execute(emailData.select()).fetchall()
+  return conn.execute(email_data.select()).fetchall()
 
 #test
-@emailDataRouter.post("/email_data")
+@email_data_router.post("/email_data")
 async def create_data(name:str):
-    data = conn.execute(emailData.insert().values(
+    data = conn.execute(email_data.insert().values(
       receiver_id=1,
       sender="chihieusky@gmail.com",
       content="hello"
