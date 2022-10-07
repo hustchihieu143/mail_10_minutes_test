@@ -3,7 +3,6 @@ import random
 import string
 from datetime import datetime
 import requests
-import os
 
 #mail
 import smtplib
@@ -34,7 +33,7 @@ email_router = APIRouter()
 
 # send email from this email to that email
 @email_router.post("/send-email")
-async def simple_send(sender: str, receiver: str, message: str):
+def simple_send(sender: str, receiver: str, message: str):
   content = f"""\
         Subject: Hi Mailtrap
         To: {receiver}
@@ -69,22 +68,20 @@ async def simple_send(sender: str, receiver: str, message: str):
 
 # get all email in system
 @email_router.get("/")
-async def read_data():
+def read_data():
   print(os.path)
   return conn.execute(email.select()).fetchall()
 
 
 # get inbox of email
 @email_router.get("/inbox")
-async def get_inbox(name: str):
-  user = await conn.execute(email.select().where(email.c.name == name)).fetchone()
+def get_inbox(name: str):
+  user = conn.execute(email.select().where(email.c.name == name)).fetchone()
   result = datetime.utcnow().timestamp() - user.created_at.timestamp()
-  print(result)
   
   
   if(user and result <= 10*60):
-    inbox = await conn.execute(email_data.select().where(email_data.c.receiver_id == user.id)).fetchall()
-    return inbox
+    return conn.execute(email_data.select().where(email_data.c.receiver_id == user.id)).fetchall()
 
 # random email func
 def random_char(char_num):
@@ -92,9 +89,9 @@ def random_char(char_num):
 
 # random email and save to database
 @email_router.post("/")
-async def random_email_func():
+def random_email_func():
     email_rand = random_char(8)+"@gmail.com"
-    data = await conn.execute(email.insert().values(
+    data = conn.execute(email.insert().values(
       name=email_rand
     ))
     return data.is_insert

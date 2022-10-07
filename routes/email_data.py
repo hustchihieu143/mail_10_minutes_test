@@ -9,12 +9,12 @@ email_data_router = APIRouter()
 
 #test
 @email_data_router.get("/get_data")
-async def read_data():
+def read_data():
   return conn.execute(email_data.select()).fetchall()
 
 #test
 @email_data_router.post("/email_data")
-async def create_data(name:str):
+def create_data(name:str):
     data = conn.execute(email_data.insert().values(
       receiver_id=1,
       sender="chihieusky@gmail.com",
