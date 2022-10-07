@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 import sys
-sys.path.insert(0,'/home/chihieu/project_web/test_poetry/config')
-sys.path.insert(1,'/home/chihieu/project_web/test_poetry/models')
-from db import conn
-from index import email_data
+#sys.path.insert(0,'/home/chihieu/project_web/test_poetry/config')
+#sys.path.insert(1,'/home/chihieu/project_web/test_poetry/models')
+from config.db import conn
+from models.index import email_data
 
 email_data_router = APIRouter()
 

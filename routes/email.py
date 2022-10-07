@@ -21,12 +21,12 @@ login = os.environ.get("LOGIN")
 password = os.environ.get("PASSWORD")
 
 import sys
-sys.path.insert(0,'/home/chihieu/project_web/test_poetry/config')
-sys.path.insert(1,'/home/chihieu/project_web/test_poetry/models')
+#sys.path.insert(0,'/home/chihieu/project_web/test_poetry/config')
+#sys.path.insert(1,'/home/chihieu/project_web/test_poetry/models')
 
-from db import conn
-from index import email
-from index import email_data
+from config.db import conn
+from models.index import email
+from models.index import email_data
 
 email_router = APIRouter()
 
